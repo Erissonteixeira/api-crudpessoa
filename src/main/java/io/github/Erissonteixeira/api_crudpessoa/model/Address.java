@@ -1,6 +1,8 @@
 package io.github.Erissonteixeira.api_crudpessoa.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,6 +15,9 @@ public class Address {
     private String city;
     private String state;
     private String zipCode;
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
     public Address(Long id, String road, String number, String neighborhood, String city, String state, String zipCode){
         this.id = id;
@@ -48,10 +53,6 @@ public class Address {
         return state;
     }
 
-    public String getZipcode() {
-        return zipCode;
-    }
-
     public void setRoad(String road) {
         this.road = road;
     }
@@ -72,7 +73,19 @@ public class Address {
         this.state = state;
     }
 
-    public void setZipcode(String zipCode) {
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

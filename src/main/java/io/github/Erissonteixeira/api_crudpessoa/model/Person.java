@@ -3,6 +3,8 @@ package io.github.Erissonteixeira.api_crudpessoa.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "persons")
@@ -13,6 +15,8 @@ public class Person {
     private String nome;
     private LocalDate dataNascimento;
     private final String cpf;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
 
     public Person(Long id, String nome, LocalDate dataNascimento, String cpf) {
         this.id = id;
@@ -43,6 +47,14 @@ public class Person {
 
     public String getCpf() {
         return cpf;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }
 
