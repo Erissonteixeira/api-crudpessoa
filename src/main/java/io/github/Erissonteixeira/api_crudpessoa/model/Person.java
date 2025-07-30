@@ -1,5 +1,6 @@
 package io.github.Erissonteixeira.api_crudpessoa.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -11,13 +12,16 @@ import java.util.List;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
     private String nome;
     private LocalDate dataNascimento;
-    private final String cpf;
+    private String cpf;
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Address> addresses = new ArrayList<>();
 
+    public Person(){
+    }
     public Person(Long id, String nome, LocalDate dataNascimento, String cpf) {
         this.id = id;
         this.nome = nome;
