@@ -1,13 +1,13 @@
 package io.github.Erissonteixeira.api_crudpessoa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "addresses")
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String road;
     private String number;
@@ -17,8 +17,12 @@ public class Address {
     private String zipCode;
     @ManyToOne
     @JoinColumn(name = "person_id")
+    @JsonBackReference
     private Person person;
 
+    public Address(){
+
+    }
     public Address(Long id, String road, String number, String neighborhood, String city, String state, String zipCode){
         this.id = id;
         this.road = road;
