@@ -52,6 +52,9 @@ public class Person {
     public String getCpf() {
         return cpf;
     }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public List<Address> getAddresses() {
         return addresses;
