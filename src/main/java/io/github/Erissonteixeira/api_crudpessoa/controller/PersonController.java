@@ -25,4 +25,17 @@ public class PersonController {
         var people = service.findAll();
         return ResponseEntity.ok(people);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Person> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findById(id));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        service.deletarPerson(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person person){
+        return ResponseEntity.status(HttpStatus.OK).body(service.updatePerson(id, person));
+    }
 }
