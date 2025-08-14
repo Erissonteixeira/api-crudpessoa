@@ -17,17 +17,8 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Person's name is required")
-    @Size(max = 100, message = "Name must be at most 100 characters")
-    @Column(name = "name_person", length = 100, nullable = false)
     private String nome;
-    @PastOrPresent(message = "Date of birth must be in the past or today")
-    @Column(name = "birth_date")
     private LocalDate dataNascimento;
-    @NotBlank(message = "CPF is required")
-    @Size(min = 11, max = 11, message = "CPF must be exactly 11 characters")
-    @Pattern(regexp = "\\d{11}", message = "CPF must contain exactly 11 characters")
-    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
